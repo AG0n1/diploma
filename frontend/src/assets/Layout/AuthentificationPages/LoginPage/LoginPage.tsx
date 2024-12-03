@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {Button, Form, Image, Input} from "antd";
 import logo from '../../../img/logo.png';
 import cn from 'classnames'
@@ -12,8 +12,16 @@ interface IUserDataOut {
 
 const LoginPage: FC = () => {
     const [form] = Form.useForm()
+    const [loadingSubmitButton, setLoadingSubmitButton] = useState<boolean>(false)
 
     const onSubmit = async (values: IUserDataOut) => {
+        setLoadingSubmitButton(true)
+        setTimeout(() => {
+            fetch('http://localhost:3000/user')
+                .then((response) => response.json())
+                .then((response) => console.log(response))
+                .then(() => setLoadingSubmitButton(false))
+        }, 1000)
         form?.resetFields()
     }
 
@@ -58,6 +66,7 @@ const LoginPage: FC = () => {
                         />
                     </Form.Item>
                     <Button
+                        loading={loadingSubmitButton}
                         htmlType={'submit'}
                     >
                         Войти
