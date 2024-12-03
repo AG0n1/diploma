@@ -13,8 +13,7 @@ interface IUserDataOut {
 const LoginPage: FC = () => {
     const [form] = Form.useForm()
 
-    const onSubmit = (values: IUserDataOut) => {
-        console.log(values)
+    const onSubmit = async (values: IUserDataOut) => {
         form?.resetFields()
     }
 
