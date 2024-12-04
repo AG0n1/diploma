@@ -1,8 +1,9 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import LoginPage from "./assets/Layout/AuthentificationPages/LoginPage/LoginPage.tsx";
-import PageNotFound from "./assets/Layout/PageNotFound/PageNotFound.tsx";
 import {useUserStore} from "./store/userStore.tsx";
 import {isNil} from 'lodash'
+import MainPage from "./assets/components/MainPage/MainPage.tsx";
+import {ROUTES} from "./assets/common/routes.ts";
 
 function App() {
 
@@ -14,7 +15,19 @@ function App() {
                 {!isNil(user) ?
                     (
                         <Routes>
-
+                            <Route
+                                path={'mainPage'}
+                                element={<MainPage />}
+                            />
+                            <Route
+                                path={'*'}
+                                element={
+                                    <Navigate
+                                        to={`http://localhost:5173/${ROUTES.mainPage}`}
+                                        replace
+                                    />
+                                }
+                            ></Route>
                         </Routes>
                     )
                     :
@@ -32,7 +45,12 @@ function App() {
                             />
                             <Route
                                 path={'*'}
-                                element={<PageNotFound />}
+                                element={
+                                    <Navigate
+                                        to={ROUTES.loginPage}
+                                        replace
+                                    />
+                                }
                             />
                         </Routes>
                     )

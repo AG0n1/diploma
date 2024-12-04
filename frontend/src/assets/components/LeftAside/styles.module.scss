@@ -1,0 +1,17 @@
+@use '../../styles/variables' as *;
+
+.leftAside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+  height: 100vh;
+
+  background-image: $mainGradient
+};
+
+.leftAsideLogo {
+  width: 150px;
+  margin-top: 20px;
+}

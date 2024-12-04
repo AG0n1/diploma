@@ -6,6 +6,8 @@ import cn from 'classnames'
 import s from './styles.module.scss'
 import {useUserStore} from "../../../../store/userStore.tsx";
 import {text} from "../../../common/text.tsx";
+import {useLocation, useNavigate} from "react-router-dom";
+import {ROUTES} from "../../../common/routes.ts";
 
 interface IUserDataOut {
     email: string,
@@ -19,9 +21,10 @@ interface IUserResponse {
 
 const LoginPage: FC = () => {
     const [form] = Form.useForm()
+    const {pathname} = useLocation()
     const [loadingSubmitButton, setLoadingSubmitButton] = useState<boolean>(false)
-    const {setUser} = useUserStore()
-
+    const setUser = useUserStore((state) => state.setUser)
+    const navigate = useNavigate()
     const onSubmit = async (values: IUserDataOut) => {
         setLoadingSubmitButton(true)
         setTimeout(() => {
@@ -29,8 +32,14 @@ const LoginPage: FC = () => {
                 .then((response) => response.json())
                 .then((response: IUserResponse) => setUser(response.id))
                 .then(() => setLoadingSubmitButton(false))
+                .then(() => {
+                    form?.resetFields()
+                    console.log(pathname)
+                    navigate({
+                        pathname: `/${ROUTES.mainPage}`
+                    })
+                })
         }, 1000)
-        form?.resetFields()
     }
 
     return (
