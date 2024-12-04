@@ -1,8 +1,10 @@
 import {Button, Image} from "antd";
 import logo from '../../img/logo.png'
 import s from './styles.module.scss'
+import {useUserStore} from "../../../store/userStore.tsx";
 
 const LeftAside = () => {
+    const user = useUserStore(state => state.user)
     return (
         <aside
             className={s.leftAside}
@@ -13,7 +15,9 @@ const LeftAside = () => {
                 width={250}
                 className={s.leftAsideLogo}
             />
-            <Button>
+            <Button
+                onClick={() => console.log(user)}
+            >
 
             </Button>
         </aside>

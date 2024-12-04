@@ -12,7 +12,7 @@ export interface IUserStore extends IUser{
 export const useUserStore = create((set): IUserStore => {
     return {
         user: null,
-        setUser: (id) => set((state) => ({user: id})),
+        setUser: (id) => set(() => ({user: id})),
         logoutUser: () => set((state) => ({user: null}))
     }
 })

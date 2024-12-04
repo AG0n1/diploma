@@ -3,12 +3,11 @@ import LoginPage from "./assets/Layout/AuthentificationPages/LoginPage/LoginPage
 import {useUserStore} from "./store/userStore.tsx";
 import {isNil} from 'lodash'
 import MainPage from "./assets/components/MainPage/MainPage.tsx";
-import {ROUTES} from "./assets/common/routes.ts";
+import PageNotFound from "./assets/Layout/PageNotFound/PageNotFound.tsx";
 
 function App() {
 
     const {user} = useUserStore()
-    console.log(user)
     return (
         <>
             <BrowserRouter>
@@ -21,13 +20,8 @@ function App() {
                             />
                             <Route
                                 path={'*'}
-                                element={
-                                    <Navigate
-                                        to={`http://localhost:5173/${ROUTES.mainPage}`}
-                                        replace
-                                    />
-                                }
-                            ></Route>
+                                element={<PageNotFound />}
+                            />
                         </Routes>
                     )
                     :
@@ -45,12 +39,7 @@ function App() {
                             />
                             <Route
                                 path={'*'}
-                                element={
-                                    <Navigate
-                                        to={ROUTES.loginPage}
-                                        replace
-                                    />
-                                }
+                                element={<PageNotFound />}
                             />
                         </Routes>
                     )

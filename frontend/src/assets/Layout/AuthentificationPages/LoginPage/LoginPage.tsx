@@ -33,8 +33,6 @@ const LoginPage: FC = () => {
                 .then((response: IUserResponse) => setUser(response.id))
                 .then(() => setLoadingSubmitButton(false))
                 .then(() => {
-                    form?.resetFields()
-                    console.log(pathname)
                     navigate({
                         pathname: `/${ROUTES.mainPage}`
                     })
