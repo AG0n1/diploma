@@ -1,16 +1,18 @@
 import { create } from 'zustand'
 
-interface IBear {
-    user: string
+interface IUser {
+    user: string | null
 }
 
-export interface IUserStore extends IBear{
-    increasePopulation: () => void
+export interface IUserStore extends IUser{
+    setUser: (id: string) => void
+    logoutUser: () => void
 }
 
-export const useStore = create((set): IUserStore => {
+export const useUserStore = create((set): IUserStore => {
     return {
-        user: '0',
-        increasePopulation: () => set((state) => ({bears: state.bears + 1})),
+        user: null,
+        setUser: (id) => set((state) => ({user: id})),
+        logoutUser: () => set((state) => ({user: null}))
     }
 })

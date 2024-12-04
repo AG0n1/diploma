@@ -4,22 +4,30 @@ import logo from '../../../img/logo.png';
 import cn from 'classnames'
 
 import s from './styles.module.scss'
+import {useUserStore} from "../../../../store/userStore.tsx";
+import {text} from "../../../common/text.tsx";
 
 interface IUserDataOut {
     email: string,
     password: string,
 }
 
+interface IUserResponse {
+    name: string;
+    id: string
+}
+
 const LoginPage: FC = () => {
     const [form] = Form.useForm()
     const [loadingSubmitButton, setLoadingSubmitButton] = useState<boolean>(false)
+    const {setUser} = useUserStore()
 
     const onSubmit = async (values: IUserDataOut) => {
         setLoadingSubmitButton(true)
         setTimeout(() => {
             fetch('http://localhost:3000/user')
                 .then((response) => response.json())
-                .then((response) => console.log(response))
+                .then((response: IUserResponse) => setUser(response.id))
                 .then(() => setLoadingSubmitButton(false))
         }, 1000)
         form?.resetFields()
@@ -69,7 +77,7 @@ const LoginPage: FC = () => {
                         loading={loadingSubmitButton}
                         htmlType={'submit'}
                     >
-                        Войти
+                        {text.buttons.enter}
                     </Button>
                 </div>
             </Form>
