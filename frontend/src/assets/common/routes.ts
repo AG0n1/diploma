@@ -1,4 +1,4 @@
 export const ROUTES = {
-    loginPage: 'loginPage',
-    mainPage: 'mainPage'
+    loginPage: '/loginPage',
+    mainPage: '/mainPage'
 }

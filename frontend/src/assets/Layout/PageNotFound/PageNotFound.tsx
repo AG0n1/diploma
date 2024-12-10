@@ -24,7 +24,7 @@ const PageNotFound = () => {
                 <Button
                     className={s.button}
                     onClick={() => navigate({
-                        pathname: `/${ROUTES.mainPage}`
+                        pathname: ROUTES.mainPage
                     })}
                 >
                     На главную

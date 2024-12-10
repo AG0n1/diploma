@@ -30,11 +30,14 @@ const LoginPage: FC = () => {
         setTimeout(() => {
             fetch('http://localhost:3000/user')
                 .then((response) => response.json())
-                .then((response: IUserResponse) => setUser(response.id))
+                .then((response: IUserResponse) => {
+                    setUser(response.id)
+                    localStorage.setItem('token', response.id)
+                })
                 .then(() => setLoadingSubmitButton(false))
                 .then(() => {
                     navigate({
-                        pathname: `/${ROUTES.mainPage}`
+                        pathname: ROUTES.mainPage
                     })
                 })
         }, 1000)
