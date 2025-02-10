@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {BugOutlined, BuildOutlined, InfoCircleOutlined, UserOutlined,} from '@ant-design/icons';
 
 import {Layout, Menu, MenuProps} from "antd";
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import Header from "../Header";
 
 const {Sider} = Layout
@@ -25,15 +25,17 @@ function getItem(
 
 const MainPage = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate()
+    const {pathname} = useLocation()
 
     const items: MenuItem[] = [
         getItem('Пользователь', 'user', <UserOutlined/>, [
-            getItem('Расписание', 'userTimetable'),
-            getItem('Оценки', 'userMarks'),
+            getItem('Расписание', 'timetable'),
+            getItem('Оценки', 'grade'),
         ]),
-        getItem('Задания', 'task', <BuildOutlined/>, [
+        getItem('Задания', 'tasks', <BuildOutlined/>, [
             getItem('Лабиринты', 'taskLabirint'),
-            getItem('Быстрый счёт', 'taskCount'),
+            getItem('Быстрый счёт', 'quickCount'),
             getItem('Абакусы', 'tasksAbakus'),
         ]),
         getItem('О компании', 'about', <InfoCircleOutlined/>,),
@@ -55,14 +57,19 @@ const MainPage = () => {
         <Layout style={{minHeight: '100vh'}}>
             <Sider style={siderStyle} collapsible collapsed={collapsed}
                    onCollapse={(value) => setCollapsed(value)}>
-                <Menu theme={"dark"} defaultSelectedKeys={['1']} mode="inline" items={items}/>
+                <Menu theme={"dark"} defaultSelectedKeys={['1']} mode="inline" items={items}
+                      onClick={(value) =>
+                          navigate({
+                              pathname: `${value.keyPath.reverse().join('/')}`
+                          })
+                      }/>
             </Sider>
             <Layout
                 style={{
                     background: '#002140'
                 }}
             >
-                <Header/>
+                {pathname.includes('user') && <Header/>}
                 <Outlet/>
                 <div style={{height: '200vh'}} className="main">
 
