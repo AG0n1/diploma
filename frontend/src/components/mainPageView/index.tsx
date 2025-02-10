@@ -57,9 +57,11 @@ const MainPage = () => {
                    onCollapse={(value) => setCollapsed(value)}>
                 <Menu theme={"dark"} defaultSelectedKeys={['1']} mode="inline" items={items}/>
             </Sider>
-            <Layout style={{
-                background: '#002140'
-            }}>
+            <Layout
+                style={{
+                    background: '#002140'
+                }}
+            >
                 <Header/>
                 <Outlet/>
                 <div style={{height: '200vh'}} className="main">

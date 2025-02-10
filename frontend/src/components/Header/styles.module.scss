@@ -26,8 +26,36 @@
 }
 
 .userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 70%;
   height: 90%;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+.userName {
+  font-size: 40px;
+  color: white;
+}
+
+.group {
+  font-size: 17px;
+  font-style: italic;
+  margin-left: 20px;
+}
+
+.userDescription {
+  font-size: 17px;
+  font-weight: 100;
+  font-style: italic;
+  color: white;
+}
+
+.userLevel {
+  width: 150px;
+  height: 150px;
   border-radius: 10px;
   border: 1px solid white;
 }
